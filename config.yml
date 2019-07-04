@@ -1,0 +1,11 @@
+---
+endpoints:
+  endpt: 
+    endpoint: 'fake-endpoint'
+    password: 'fake-password'
+
+directories:
+  project1:
+    remotePath: '/home/theUser/Documents/tests'
+    localPath: '~/tests'
+    remoteEndpoint: 'endpt'
