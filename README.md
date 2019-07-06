@@ -2,17 +2,15 @@
 
 ## Preface
 
-Please note that this is currently a custom solution created by a single user, and is far from a complete one-size-fits-all solution at this point in time. Development is ongoing at an unscheduled pace. Contributors are welcome, and criticism is appreciated.
+*Please note that this is currently a custom solution created by a single user, and is far from a complete one-size-fits-all solution at this point in time. Development is ongoing at an unscheduled pace. Contributors are welcome, and criticism is appreciated.*
 
 ## Overview
 
-When scp-ing files from a remote to local machine (and vice-versa), you often have to enter a very verbose command, and must get the path correct. Additionally, you're probably hitting the same set of remote machines. 
+When scp-ing files from a remote to local machine (and vice-versa), you often have to enter a very verbose command, and must get the path correct. Additionally, you're probably hitting the same set of remote machines.
 
-A decent solution is to have:
-+ One-time initial configuration setup
-+ Daily usage involving aliase leveraging configuration
+To eliminate this manual work, easy-scp aims to tag a repeated task with an alias and a set of configurations. easy-scp offers execution of these tasks using just their alias.
 
-This would eliminate error and save keystrokes and time in the long run.
+This saves time and productivity, and minimizes error in the long run.
 
 ## System Requirements
 
@@ -34,7 +32,7 @@ External Dependency | Description | Installation
 ### Installation
 
 ```sh
-? git clone https://github.com/nkumar0727/easy-scp.git
+> git clone https://github.com/nkumar0727/easy-scp.git
 ```
 
 ### Initial Setup
