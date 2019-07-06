@@ -1,11 +1,8 @@
 ---
-endpoints:
-  endpt: 
-    endpoint: 'fake-endpoint'
-    password: 'fake-password'
-
-directories:
+projects:
   project1:
-    remotePath: '/home/theUser/Documents/tests'
-    localPath: '~/tests'
-    remoteEndpoint: 'endpt'
+    remotePath: '/remotePath'
+    remoteUser: 'user'
+    remoteHostname: 'hostname'
+    isPasswordNeeded: 'Y'
+    localPath: '/localPath'
