@@ -111,13 +111,9 @@ With that, all the files in /path/on/remote/machine should be located in /path/o
 
 ### Defects
 
-+ There is currently no support for passwordless ssh via public keys
-+ There is currently no error handling for anything; anything marked as [**REQUIRED**] is, in fact, required
-+ Any 'non-happy cases' (as of now, those that do not match the example given above) have not been tested -- **use at your own risk**
++ There is currently no support for passwordless ssh via RSA public keys
 
 ## TODOs
 
-+ Add basic error handling
-+ Test 'non-happy' cases
 + Investigate cross-platform usage (Windows, MacOS, other Linux distros)
 + Add support for passwordless ssh

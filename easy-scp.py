@@ -14,6 +14,7 @@ def getProjectObjectFromYMLObject(ymlObject, projectName):
 
 def getPasswordFromConfigIfNeeded(configObject):
   if configObject['isPasswordNeeded']:
+    print('Password is needed, as specified in project config...')
     return getpass()
   return None
 
@@ -23,17 +24,47 @@ def connectSSHClientToHost(sshClient, remoteHostname, remoteUser, password):
   else:
     sshClient.connect(hostname=remoteHostname, username=remoteUser, password=password)
 
-def main(argv):
-  myProject = getProjectConfigObjectFromConfigFile(argv[1])
-  password = getPasswordFromConfigIfNeeded(myProject)
-  print(myProject)
+def hasInvalidArgs(argv):
+  return len(argv) != 2
 
-  with SSHClient() as sshClient:
-    sshClient.load_system_host_keys()
-    connectSSHClientToHost(sshClient, myProject['remoteHostname'], myProject['remoteUser'], password)
-    with SCPClient(sshClient.get_transport()) as scpClient:
-      scpClient.get(myProject['remotePath'], myProject['localPath'], recursive=True)
-  print('Task completed for project \'%s\'' % argv[1])
+def printUsageMessage():
+  print('Usage: python easy-scp.py <project_name>')
+
+def main(argv):
+  
+  if hasInvalidArgs(argv):
+    printUsageMessage()
+    return
+  
+  myProject = None
+  try:
+    myProject = getProjectConfigObjectFromConfigFile(argv[1])
+  except:
+    print('No config found for project \'%s\'' % argv[1])
+    return
+
+  print('Config found for project %s :: scp -r %s@%s:%s %s' % (argv[1],
+    myProject['remoteUser'], myProject['remoteHostname'],
+    myProject['remotePath'], myProject['localPath']))
+
+  password = getPasswordFromConfigIfNeeded(myProject)
+
+  try:
+    with SSHClient() as sshClient:
+      
+      sshClient.load_system_host_keys()
+      connectSSHClientToHost(sshClient, myProject['remoteHostname'], myProject['remoteUser'], password)
+      
+      with SCPClient(sshClient.get_transport()) as scpClient:
+        scpClient.get(myProject['remotePath'], myProject['localPath'], recursive=True)
+      
+      print('Task completed for project \'%s\': scp -r %s@%s:%s %s' % (argv[1],
+        myProject['remoteUser'], myProject['remoteHostname'],
+        myProject['remotePath'], myProject['localPath']))
+  
+  except Exception as ex:
+    print('%s' % ex)
+    print('Ensure correct information in project config, and correct password')
 
 if __name__ == "__main__":
   main(argv)

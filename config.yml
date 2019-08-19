@@ -1,6 +1,6 @@
 ---
 projects:
-  project1:
+  projectAlias:
     remotePath: '/remotePath'
     remoteUser: 'user'
     remoteHostname: 'hostname'
